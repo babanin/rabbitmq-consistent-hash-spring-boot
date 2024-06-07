@@ -6,6 +6,9 @@ services:
       
     environment:
       - RABBITMQ_HOST=rabbitmq
+      - MAX_CLIENT_COUNT=10
+      - DELAY_BETWEEN_MESSAGES=5
+      - MAX_MESSAGE_COUNT=1000
     
     deploy:
       replicas: 1
