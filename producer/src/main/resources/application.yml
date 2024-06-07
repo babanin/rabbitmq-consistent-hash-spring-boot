@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: producer
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}

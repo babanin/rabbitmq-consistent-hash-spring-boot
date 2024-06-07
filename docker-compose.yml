@@ -1,0 +1,52 @@
+services:
+  producer:
+    build:
+      context: ./producer
+      dockerfile: ./Dockerfile
+      
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    
+    deploy:
+      replicas: 1
+      
+    ports:
+      - 8080:8080
+
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  consumers:
+    build:
+      context: ./consumer
+      dockerfile: ./Dockerfile
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    
+    deploy:
+      replicas: 5
+      
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+        
+  rabbitmq:
+    build:
+      context: ./rabbitmq
+      dockerfile: ./Dockerfile
+    hostname: rabbitmq
+    restart: always
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - mq-data:/var/lib/rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+volumes:
+  mq-data:
