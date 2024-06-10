@@ -41,7 +41,6 @@ class MessageGeneratorService(
         val message = Message(objectMapper.writeValueAsBytes(ClientValue(nextClient, clientValue)), messageProperties)
 
         rabbitTemplate.send(CUSTOMER_TOPIC, nextClient.toString(), message)
-        logger.info("client_id={} value={}", nextClient, clientValue)
     }
     
     fun resetTotalCount() {

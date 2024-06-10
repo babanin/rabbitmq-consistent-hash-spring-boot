@@ -6,9 +6,9 @@ services:
       
     environment:
       - RABBITMQ_HOST=rabbitmq
-      - MAX_CLIENT_COUNT=10
-      - DELAY_BETWEEN_MESSAGES=5
-      - MAX_MESSAGE_COUNT=1000
+      - MAX_CLIENT_COUNT=10000
+      - DELAY_BETWEEN_MESSAGES=1
+      - MAX_MESSAGE_COUNT=100000
     
     deploy:
       replicas: 1
@@ -28,7 +28,7 @@ services:
       - RABBITMQ_HOST=rabbitmq
     
     deploy:
-      replicas: 5
+      replicas: 10
       
     depends_on:
       rabbitmq:
