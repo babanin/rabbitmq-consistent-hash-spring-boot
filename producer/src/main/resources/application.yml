@@ -6,6 +6,6 @@ spring:
     port: ${RABBITMQ_PORT:5672}
     
 producer:
-  max-client-count: ${MAX_CLIENT_COUNT:10}
-  max-message-count: ${MAX_MESSAGE_COUNT:10}
-  delay-between-messages: ${DELAY_BETWEEN_MESSAGES:50}
+  max-client-count: ${MAX_CLIENT_COUNT:2}
+  max-message-count: ${MAX_MESSAGE_COUNT:1000}
+  delay-between-messages: ${DELAY_BETWEEN_MESSAGES:500}
